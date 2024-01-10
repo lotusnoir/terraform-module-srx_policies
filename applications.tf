@@ -13,7 +13,7 @@ resource "junos_application" "this" {
       name             = "t${app.key + 1}"
       source_port      = "0-65535"
       protocol         = length(regexall("TCP-UDP", app.value)) > 0 && app.key == 0 ? "tcp" : length(regexall("TCP-UDP", app.value)) > 0 && app.key == 1 ? "udp" : lower(element(split("_", app.value), 0))
-      destination_port = length(regexall("-", element(split("_", app.value), 1))) > 0 ? element(split("_", app.value), 1) : element(split("_", app.value), 1) - element(split("_", app.value), 1)
+      destination_port = length(regexall("-", element(split("_", app.value), 1))) > 0 ? "${element(split("_", app.value), 1)}" : "${element(split("_", app.value), 1)}-${element(split("_", app.value), 1)}"
     }
   }
 }
