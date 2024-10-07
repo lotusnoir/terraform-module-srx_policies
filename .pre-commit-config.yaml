@@ -1,7 +1,7 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-added-large-files
       - id: end-of-file-fixer
@@ -23,7 +23,7 @@ repos:
 
   # Lint: YAML
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.33.0
+    rev: v1.35.1
     hooks:
       - id: yamllint
         args:
@@ -35,32 +35,33 @@ repos:
 
   # Lint: Markdown
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.37.0
+    rev: v0.42.0
     hooks:
       - id: markdownlint
         args: ["--fix", "--disable", "MD013 MD033"]
 
   # Lint: Terraform
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.83.6
+    rev: v1.96.1
     hooks:
       - id: terraform_fmt
       - id: terraform_validate
-      #- id: terraform_tflint
-      - id: terraform_tfsec
+      - id: terraform_tflint
+      - id: terraform_trivy
       - id: terraform_checkov
-      #- id: terraform_docs
+      - id: terraform_docs
+      - id: tfupdate
 
-  ## terrascan
+  # terrascan
   #- repo: https://github.com/accurics/terrascan
-  #  rev: v1.10.0
+  #  rev: v1.19.9
   #  hooks:
   #    - id: terraform-pre-commit
-  #      args: ["-i terraform --non-recursive examples/docs/"]
+  #      args: ["-i terraform"]
 
   # Versioning: Commit Messages & Changelog
-  - repo: https://github.com/commitizen-tools/commitizen
-    rev: 3.12.0
-    hooks:
-      - id: commitizen
-        stages: [commit-msg]
+  #- repo: https://github.com/commitizen-tools/commitizen
+  #  rev: 3.12.0
+  #  hooks:
+  #    - id: commitizen
+  #      stages: [commit-msg]
