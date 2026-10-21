@@ -30,3 +30,4 @@ output "applications_present_on_file" { value = local.applications_present_on_fi
 // data
 #output "all_zones" { value = data.junos_interfaces_physical_present.all_zones.interfaces}
 #output "all_zones" { value = local.allzones}
+output "resolved" { value = data.dns_a_record_set.resolved }

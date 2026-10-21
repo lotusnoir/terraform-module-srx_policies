@@ -31,7 +31,11 @@ variable "addressbook_groupsofgroups" {
   type        = map(list(string))
   default     = {}
 }
-
+variable "addressbook_groupsmixed" {
+  description = "map of list of address-book-set to create"
+  type        = map(map(list(string)))
+  default     = {}
+}
 
 variable "addressbook_network" {
   description = "map of extra address-book in network format to create"
@@ -68,6 +72,10 @@ variable "policy_rules" {
     match_source_address_excluded      = optional(bool)
     match_source_end_user_profile      = optional(string)
     permit_tunnel_ipsec_vpn            = optional(string)
+    permit_application_services = optional(object({
+      security_intelligence_policy = optional(string)
+      idp_policy                   = optional(string)
+    }))
   }))
   default = {}
 }
@@ -79,6 +87,27 @@ variable "policy_rules" {
 //}
 variable "adressbook_extract" {
   description = "Extract dns from rules of just add the one in var.addressbook_dns"
+  type        = bool
+  default     = true
+}
+variable "extract_to_dns" {
+  description = "Create dns-name address book from extracted regex server name"
+  type        = bool
+  default     = true
+}
+
+variable "ordered_application" {
+  description = "Select ordered ressource instead of unordered one"
+  type        = bool
+  default     = false
+}
+variable "ordered_global_policy" {
+  description = "Select ordered ressource instead of unordered one"
+  type        = bool
+  default     = true
+}
+variable "ordered_policy" {
+  description = "Select ordered ressource instead of unordered one"
   type        = bool
   default     = true
 }
